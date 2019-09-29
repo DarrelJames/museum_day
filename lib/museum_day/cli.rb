@@ -58,19 +58,6 @@ class MuseumDay::CLI
     end
   end
 
-  def get_zipcode
-    puts ""
-    puts "Please enter your zipcode or type exit"
-
-    @zipcode = gets.strip
-
-    if zipcode.size != 5
-      puts ""
-      puts "Invalid Zipcode"
-      get_zipcode
-    end
-  end
-
   def print_museum_details(input)
 
     museum = MuseumDay::Museum.find(input.to_i)
@@ -102,6 +89,20 @@ class MuseumDay::CLI
     puts "To go back to list of museum, enter 'back'."
     puts "To search a new zipcode, enter 'new'."
     puts "To quit, enter 'exit'."
+  end
+
+  def get_zipcode
+    puts ""
+    puts "Please enter your zipcode or type exit"
+
+    @zipcode = gets.strip
+    exit?(zipcode)
+
+    if zipcode.size != 5
+      puts ""
+      puts "Invalid Zipcode"
+      get_zipcode
+    end
   end
 
   def exit?(input)
