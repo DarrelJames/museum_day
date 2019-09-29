@@ -1,6 +1,8 @@
-require "museum_day/version"
+require "open-uri"
+require "nokogiri"
 
-module MuseumDay
-  class Error < StandardError; end
-  # Your code goes here...
-end
+
+require_relative "./museum_day/version"
+require_relative "./museum_day/cli"
+require_relative "./museum_day/scraper"
+require_relative "./museum_day/museum"
