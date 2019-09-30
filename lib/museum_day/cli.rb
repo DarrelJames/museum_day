@@ -14,23 +14,7 @@ class MuseumDay::CLI
 
     exit?(zipcode)
     list_museums(zipcode)
-
-    input = 0
-
-    while !input.to_i.between?(1, MuseumDay::Museum.all.size)
-      puts ""
-      puts "Enter the number of the museum you'd like more info on or type exit"
-      input = gets.strip
-
-      exit?(input)
-      if input.to_i.between?(1, MuseumDay::Museum.all.size)
-        print_museum_details(input)
-      else
-        puts "Invalid number"
-
-      end
-    end
-
+    get_user_input_for_details_and_print
     menu
 
     input = gets.strip.downcase
@@ -38,7 +22,7 @@ class MuseumDay::CLI
 
     if input ==  "new"
       MuseumDay::Museum.clear_all
-      @zipcode = nil
+      self.zipcode = nil
       start
     elsif input == "back"
       MuseumDay::Museum.clear_all
@@ -50,8 +34,7 @@ class MuseumDay::CLI
 
     MuseumDay::Scraper.new(input).make_museums
 
-    puts ""
-    puts "--------------Listing museums near #{zipcode}--------------"
+    puts "\n--------------Listing museums near #{zipcode}--------------"
 
     MuseumDay::Museum.all.each.with_index(1) do |museum, idx|
       puts "#{idx}. #{museum.name} - #{museum.city}"
@@ -62,8 +45,7 @@ class MuseumDay::CLI
 
     museum = MuseumDay::Museum.find(input.to_i)
 
-    puts ""
-    puts "--------------#{museum.name}--------------"
+    puts "\n--------------#{museum.name}--------------"
     puts "#{museum.address}"
     puts "      Hours: #{museum.hours}"
     puts ""
@@ -79,28 +61,43 @@ class MuseumDay::CLI
       puts "Twitter:      #{museum.twitter}"
     end
 
-    puts ""
-    puts "--------------Description--------------"
+    puts "\n--------------Description--------------"
     puts "#{museum.description}"
   end
 
+  def get_user_input_for_details_and_print
+    input = 0
+
+    while !input.to_i.between?(1, MuseumDay::Museum.all.size)
+      puts "\nEnter the number of the museum you'd like more info on or type exit"
+      input = gets.strip
+
+      exit?(input)
+      if input.to_i.between?(1, MuseumDay::Museum.all.size)
+        print_museum_details(input)
+      else
+        puts "Invalid number"
+
+      end
+    end
+  end
+
   def menu
-    puts ""
-    puts "To go back to list of museum, enter 'back'."
+    puts "\n---------------------------------------------"
+    puts "To go back to list of museums, enter 'back'."
     puts "To search a new zipcode, enter 'new'."
     puts "To quit, enter 'exit'."
+    puts "---------------------------------------------"
   end
 
   def get_zipcode
-    puts ""
-    puts "Please enter your zipcode or type exit"
+    puts "\nPlease enter your zipcode or type exit"
 
-    @zipcode = gets.strip
+    self.zipcode = gets.strip
     exit?(zipcode)
 
     if zipcode.size != 5
-      puts ""
-      puts "Invalid Zipcode"
+      puts "\nInvalid Zipcode"
       get_zipcode
     end
   end
