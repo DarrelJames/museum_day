@@ -8,13 +8,15 @@ class MuseumDay::CLI
 
 
   def start
-    if !zipcode
-      get_zipcode
-    end
+
+    get_zipcode if !zipcode
 
     exit?(zipcode)
+
     list_museums(zipcode)
+
     get_user_input_for_details_and_print
+
     menu
 
     input = gets.strip.downcase
@@ -53,14 +55,8 @@ class MuseumDay::CLI
     puts "Website:      #{museum.website_url}"
 
     museum.social_urls
-    if museum.fb
-      puts "Facebook:     #{museum.fb}"
-    end
-
-    if museum.twitter
-      puts "Twitter:      #{museum.twitter}"
-    end
-
+    puts "Facebook:     #{museum.fb}" if museum.fb
+    puts "Twitter:      #{museum.twitter}" if museum.twitter
     puts "\n--------------Description--------------"
     puts "#{museum.description}"
   end
@@ -103,9 +99,7 @@ class MuseumDay::CLI
   end
 
   def exit?(input)
-    if input.downcase == "exit"
-      goodbye
-    end
+    goodbye if input.downcase == "exit"
   end
 
   def goodbye
