@@ -12,7 +12,7 @@ gem 'museum_day'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 

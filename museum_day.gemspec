@@ -10,14 +10,14 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Museums in your area"
   spec.description   = "View participating Museum Day ticket holders in your area. View details about the museum"
-  spec.homepage      = "https://github.com/DarrelJames/museum_day"
+  spec.homepage      = "https://rubygems.org/gems/museum_day"
   spec.license       = "MIT"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
   #
-  # spec.metadata["homepage_uri"] = spec.homepage
-  # spec.metadata["source_code_uri"] = "https://github.com/DarrelJames/museum_day"
-  # spec.metadata["changelog_uri"] = "https://github.com/DarrelJames/museum_day/blob/master/CHANGELOG.md"
+  spec.metadata["homepage_uri"] = spec.homepage
+  spec.metadata["source_code_uri"] = "https://github.com/DarrelJames/museum_day"
+
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
@@ -25,9 +25,9 @@ Gem::Specification.new do |spec|
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
   spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  # spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-
+  spec.executables = "museum_day"
   spec.add_development_dependency "bundler", "~> 2.0"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "pry"
