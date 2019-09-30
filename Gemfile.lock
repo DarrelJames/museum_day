@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    museum_day (0.1.0)
+    museum_day (0.1.1)
       nokogiri
 
 GEM
