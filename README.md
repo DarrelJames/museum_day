@@ -4,18 +4,6 @@ This Ruby Gem provides a CLI to view the participating Museums for Museum Day ti
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'museum_day'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
     $ gem install museum_day
 
 ## Usage
