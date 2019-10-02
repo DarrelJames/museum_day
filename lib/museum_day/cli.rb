@@ -22,14 +22,8 @@ class MuseumDay::CLI
     input = gets.strip.downcase
     exit?(input)
 
-    if input ==  "new"
-      MuseumDay::Museum.clear_all
-      self.zipcode = nil
-      start
-    elsif input == "back"
-      MuseumDay::Museum.clear_all
-      start
-    end
+    new_or_back?(input)
+
   end
 
   def list_museums(input)
@@ -50,8 +44,7 @@ class MuseumDay::CLI
     puts "\n--------------#{museum.name}--------------"
     puts "#{museum.address}"
     puts "      Hours: #{museum.hours}"
-    puts ""
-    puts "Phone Number: #{museum.phone_number}"
+    puts "\nPhone Number: #{museum.phone_number}"
     puts "Website:      #{museum.website_url}"
 
     museum.social_urls
@@ -95,6 +88,17 @@ class MuseumDay::CLI
     if zipcode.size != 5
       puts "\nInvalid Zipcode"
       get_zipcode
+    end
+  end
+
+  def new_or_back?(input)
+    if input ==  "new"
+      MuseumDay::Museum.clear_all
+      self.zipcode = nil
+      start
+    elsif input == "back"
+      MuseumDay::Museum.clear_all
+      start
     end
   end
 
