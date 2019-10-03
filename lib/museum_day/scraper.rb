@@ -16,8 +16,20 @@ class MuseumDay::Scraper
 
   def make_museums
     scrape_museums_index.each do |museum|
-      MuseumDay::Museum.new_from_index(museum)
+      attribute_hash = {
+        name: museum.css("h4.name").text,
+        city: museum.css("h5.location").text,
+        url: museum.css("a").attribute("href").value,
+        hours: museum.at("div strong").next_sibling.text.strip
+      }
+      MuseumDay::Museum.new(attribute_hash)
     end
+  end
+
+  def scrape_details(museum)
+    url = museum.url
+
+
   end
 
 end
