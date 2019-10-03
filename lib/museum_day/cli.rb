@@ -28,7 +28,8 @@ class MuseumDay::CLI
 
   def list_museums(input)
 
-    MuseumDay::Scraper.new(input).make_museums
+    @scraper = MuseumDay::Scraper.new(input)
+    @scraper.make_museums
 
     puts "\n--------------Listing museums near #{zipcode}--------------"
 
@@ -41,13 +42,13 @@ class MuseumDay::CLI
 
     museum = MuseumDay::Museum.find(input.to_i)
 
+    @scraper.scrape_details(museum)
+
     puts "\n--------------#{museum.name}--------------"
     puts "#{museum.address}"
     puts "      Hours: #{museum.hours}"
     puts "\nPhone Number: #{museum.phone_number}"
     puts "Website:      #{museum.website_url}"
-
-    museum.social_urls
     puts "Facebook:     #{museum.fb}" if museum.fb
     puts "Twitter:      #{museum.twitter}" if museum.twitter
     puts "\n--------------Description--------------"
