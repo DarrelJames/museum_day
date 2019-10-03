@@ -27,9 +27,19 @@ class MuseumDay::Scraper
   end
 
   def scrape_details(museum)
-    url = museum.url
+    doc = Nokogiri::HTML(open("https://www.smithsonianmag.com#{museum.url}"))
+    museum.description = doc.css("div.aux-info p").first.text
+    museum.address = doc.css("p.address").text.strip
+    museum.website_url = doc.css("i.fa-external-link + a").attribute("href").value
+    museum.phone_number = doc.at("i.fa-phone").next_sibling.text.strip
 
-
+    #Scrape Socials
+    doc.css("div.contact a").collect { |link| link.attribute("href").value }.each do |link|
+      if link.include?("twitter")
+        museum.twitter = link
+      elsif link.include?("facebook")
+        museum.fb = link
+      end
+    end
   end
-
 end
