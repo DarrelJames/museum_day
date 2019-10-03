@@ -5,20 +5,11 @@ class MuseumDay::Museum
 
   @@all = []
 
-  def self.new_from_index(museum)
-    self.new(
-      museum.css("h4.name").text,
-      museum.css("h5.location").text,
-      museum.css("a").attribute("href").value,
-      museum.at("div strong").next_sibling.text.strip
-    )
-  end
-
-  def initialize(name = nil, city = nil, url = nil, hours = nil)
-    @name = name
-    @city = city
-    @url = url
-    @hours = hours
+  def initialize(attributes)
+    @name = attributes[:name]
+    @city = attributes[:city]
+    @url = attributes[:url]
+    @hours = attributes[:hours]
     @@all << self
   end
 
