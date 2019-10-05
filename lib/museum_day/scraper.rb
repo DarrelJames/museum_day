@@ -1,3 +1,4 @@
+require 'pry'
 class MuseumDay::Scraper
 
   attr_accessor :zipcode
@@ -16,11 +17,12 @@ class MuseumDay::Scraper
 
   def make_museums
     scrape_museums_index.each do |museum|
+
       attribute_hash = {
         name: museum.css("h4.name").text,
         city: museum.css("h5.location").text,
         url: museum.css("a").attribute("href").value,
-        hours: museum.at("div strong").next_sibling.text.strip
+        hours: museum.css("div").last.text.strip
       }
       MuseumDay::Museum.new(attribute_hash)
     end

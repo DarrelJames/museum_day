@@ -46,7 +46,7 @@ class MuseumDay::CLI
 
     puts "\n--------------#{museum.name}--------------"
     puts "#{museum.address}"
-    puts "      Hours: #{museum.hours}"
+    puts "       #{museum.hours}"
     puts "\nPhone Number: #{museum.phone_number}"
     puts "Website:      #{museum.website_url}"
     puts "Facebook:     #{museum.fb}" if museum.fb
